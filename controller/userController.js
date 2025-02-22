@@ -53,4 +53,12 @@ export default class UserController {
 		const user = await User.findOne({ where: { id: userId } });
 		res.json(user);
 	}
+
+	static async register(req, res) {
+		let { username, email, password } = req.body;
+		password = bcrypt.hashSync(password, 8);
+		const user = await User.create({ username, email, password });
+		const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: "1h" });
+		return res.json({ accessToken: token });
+	}
 }

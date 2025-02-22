@@ -1,5 +1,6 @@
 import connection from "./connection.js";
 import { DataTypes } from "sequelize";
+import User from "./user.js";
 
 const Parkir = connection.define(
 	"Parkir",
@@ -18,6 +19,6 @@ const Parkir = connection.define(
 		tableName: "parkir",
 	}
 );
-Parkir.belongsTo(UserActivation, { targetKey: "id", foreignKey: "user_id" });
+Parkir.belongsTo(User, { targetKey: "id", foreignKey: "user_id" });
 
 export default Parkir;
